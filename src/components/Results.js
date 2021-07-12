@@ -24,7 +24,7 @@ const Results = props => {
         }
     }
 
-    const ResultIcon = styleMap[props.referenceValidity].icon
+    const ResultIcon = styleMap[props.referenceValidity].icon;
 
     return (
         <div className="Results d-flex flex-column justify-content-center">
@@ -34,7 +34,7 @@ const Results = props => {
                 <ResultIcon/>
             </div>
             <p className={`iconText text-center ${styleMap[props.referenceValidity].colourClass}`}>{styleMap[props.referenceValidity].text}</p>
-            <p className="text-center">{props.validitySubtext || [props.referenceValidity].subtext}</p>
+            <p className="text-center">{props.validitySubtext || styleMap[props.referenceValidity].subtext}</p>
         </div>
     );
 };
