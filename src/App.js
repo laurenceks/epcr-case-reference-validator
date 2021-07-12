@@ -36,7 +36,7 @@ function App() {
                 finalSubtext = "This case reference ends in 0000 which means it was created offline - contact epcr@secamb.nhs.uk to confirm it was merged"
             } else if (letterLikeRegEx.test(refString.substr(0, 8))) {
                 finalValidity = "warning"
-                //create reccomendations
+                //create recommendations
             } else {
                 finalValidity = "valid";
             }
@@ -44,9 +44,9 @@ function App() {
             finalValidity = "invalid";
             if (refString.length < 12) {
                 finalSubtext = "Case references must be 12 digits long"
-            } else if (!/^[A-Z]/.test(refString)){
+            } else if (!/^[A-Z]/.test(refString)) {
                 finalSubtext = "Case references must start with a letter"
-            }else if (!/^\d{4}$/.test(refString.substr(9,4))){
+            } else if (!/^\d{4}$/.test(refString.substr(9, 4))) {
                 finalSubtext = "Case references must end in four digits"
             }
         }
@@ -56,12 +56,13 @@ function App() {
 
 
     return (
-        <div>
+        <div className={"pageWrap"}>
+            <div className={"pageWrapBg"}/>
             <Header/>
             <div className="mainWrap container-fluid d-flex flex-column justify-content-center px-5">
                 <div className="row justify-content-center">
                     <ReferenceInput refString={refString} onChange={setRefString}/></div>
-                <div className="row justify-content-center">
+                <div className="row justify-content-center mb-5">
                     {referenceValidity && <Results refString={refString} referenceValidity={referenceValidity}
                                                    validitySubtext={validitySubtext}/>}
                 </div>

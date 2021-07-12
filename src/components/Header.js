@@ -5,8 +5,8 @@ const Header = props => {
     return (
         <div className="headerWrap w-100 text-center p-5">
             <div className="header mx-auto">
-                <h1 className={"my-3"}>ePCR Case Reference Validator</h1>
-                <p className={"my-3"}>This is a simple tool for validating ePCR case references</p>
+                    <h1 className={"mt-5 mb-3"}>ePCR Case Reference Validator</h1>
+                    <p className={"my-3"}>This is a simple tool for validating ePCR case references</p>
             </div>
             <div className="header bg"/>
         </div>

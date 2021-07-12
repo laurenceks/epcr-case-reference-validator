@@ -3,15 +3,16 @@
 
 //variable overwrites
 
-$primary: #006633;
+$primary: #40739e;
+$success: #4cd137;
+$warning: #fbc531;
+$danger: #e84118;
 $font-family-sans-serif: "Roboto", sans-serif !default;
 //$headings-font-family: "Bahnschrift", "Heebo", "Arial", sans-serif;
 //$input-btn-font-family: "Bahnschrift", "Heebo", "Arial", sans-serif;
 $input-font-family: $font-family-sans-serif;
 
-$btn-border-radius: 1.5rem;
-$btn-border-radius-sm: 1.5rem;
-$btn-border-radius-lg: 1.5rem;
+$bgBorderRadius: 20px;
 
 $easeOutCirc: cubic-bezier(0, 0.55, 0.45, 1);
 
@@ -23,14 +24,50 @@ $transition-collapse: height 0.4s $easeOutCirc;
 html, body {
   margin: 0;
   padding: 0;
+  background-color: #353b48 !important;
 }
 
 div.pageWrap {
-  max-width: 50rem;
+  position: relative;
 }
 
-div.mainWrap {
-  max-width: 46rem;
+div.mainWrap > div {
+  z-index: 0;
+}
+
+div.mainWrap, div.headerBody, div.header:after, div.pageWrapBg {
+  max-width: 720px;
+}
+
+div.pageWrapBg, div.header:after {
+  content: "";
+  position: absolute;
+  background-color: #f5f6fa;
+  border: 1px solid #dcdde1;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  mix-blend-mode: lighten;
+}
+
+div.pageWrapBg {
+  top: 0;
+  border-bottom-right-radius: $bgBorderRadius;
+  border-bottom-left-radius: $bgBorderRadius;
+  z-index: 0;
+}
+
+div.header:after {
+  top: 1.5rem;
+  height: calc(100% - 1.5rem);
+  border-top-right-radius: $bgBorderRadius;
+  border-top-left-radius: $bgBorderRadius;
+  border-bottom: none;
+  opacity: 0.75;
 }
 
 div.searchContainer {
@@ -54,6 +91,7 @@ div.searchContainer > input::placeholder {
 
 div.headerWrap {
   position: relative;
+  z-index: 0;
 }
 
 div.header.bg {
@@ -62,11 +100,14 @@ div.header.bg {
   left: 0;
   width: 100vw;
   height: calc(100% + 3rem);
-  background-color: $gray-200;
+  background-color: #40739e;
+  background-image: url("https://products.ls.graphics/mesh-gradients/images/25.-Witch-Haze_1.jpg");
+  background-size: cover;
+  background-position: 50% 50%;
   z-index: -1;
 }
 
-p.resultString{
+p.resultString {
   font-size: 3rem;
   letter-spacing: 1rem;
   text-transform: uppercase;
