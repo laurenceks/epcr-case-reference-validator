@@ -33,6 +33,7 @@ function App() {
                 text: ""
             },
             individualCharacters: {},
+            replacements: [],
             showUnderscore: false
         }
         //tests
@@ -52,12 +53,25 @@ function App() {
                     finalValidity = "warning"
                     refString.substr(0, 8).split("").forEach(findLetterLike)
                     //create recommendations
-
+                    const substitutionMap = {
+                        0: [0, "O"],
+                        1: [1, "I"],
+                        5: [5, "S"],
+                        O: ["O", 0],
+                        I: ["I", 1],
+                        S: ["S", 5]
+                    }
+                    const cartesianArray = refString.substr(0, 8).split("").map((x) => {
+                        return substitutionMap[x] ? substitutionMap[x] : [x]
+                    })
+                    const cartesian = (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
+                    finalResultMatches.replacements = cartesian(...cartesianArray).map((x) => {
+                        return x.join("")
+                    });
                 } else if (refString.substr(8, 4) === "0000") {
                     finalValidity = "warning"
                     finalSubtext = "This case reference ends in 0000 which means it was created offline - contact epcr@secamb.nhs.uk to confirm it was merged"
                     finalResultMatches.lastFour = {match: true, text: "Ends in 0000"}
-
                     finalResultMatches.showUnderscore = true
                 } else {
                     finalValidity = "valid";

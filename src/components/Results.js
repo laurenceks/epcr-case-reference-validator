@@ -4,6 +4,11 @@ import ResultString from "./ResultString";
 import {useRef, useState} from "react";
 
 const Results = props => {
+    const letterToSpan = (x, i, a, match = props.resultMatches.individualCharacters[i], key = null) => {
+        return <span
+            className={`letter${match ? ` letterMatch  ${styleMap[props.referenceValidity].borderClass}` : ""}`}
+            key={key || i}>{x} {match && <span className={`letterCaret`}/>} </span>;
+    }
     const styleMap = {
         "valid": {
             colourClass: "text-success",
@@ -41,9 +46,11 @@ const Results = props => {
             <div className={`py-4 ${props.resultMatches.showUnderscore && "mb-5"} position-relative`}>
                 <ResultString resultString={props.refString} referenceValidity={props.referenceValidity}
                               styleMap={styleMap} setUnderScoreDimensions={setUnderScoreDimensions}
+                              letterToSpan={letterToSpan}
                               resultMatches={props.resultMatches}/>
                 {props.resultMatches.showUnderscore &&
-                <div className={`stringUnderscore ${styleMap[props.referenceValidity].borderClass}`} style={underScoreDimensions}>
+                <div className={`stringUnderscore ${styleMap[props.referenceValidity].borderClass}`}
+                     style={underScoreDimensions}>
                     <div
                         className={`stringUnderscoreText ${styleMap[props.referenceValidity].colourClass}`}>{props.resultMatches.length.match ? props.resultMatches.length.text : props.resultMatches.lastFour.match ? props.resultMatches.lastFour.text : ""}</div>
                 </div>}
@@ -54,13 +61,25 @@ const Results = props => {
             </div>
             <p className={`iconText text-center ${styleMap[props.referenceValidity].colourClass}`}>{styleMap[props.referenceValidity].text}</p>
             <p className="text-center">{props.validitySubtext || styleMap[props.referenceValidity].subtext}</p>
+            <ul>
+                {props.resultMatches.replacements.map((x) => {
+                    return <li> {x.split("").map((y, i, a) => {
+                        return letterToSpan(y, i, a, props.refString.charAt(i) !== y, `${x}-${y}-${i}`)
+                    })}
+                    </li>
+                })}
+            </ul>
         </div>
     );
 };
 
-Results.propTypes = {
-    refString: PropTypes.string,
-    referenceValidity: PropTypes.string
-};
+Results.propTypes =
+    {
+        refString: PropTypes.string,
+        referenceValidity
+:
+PropTypes.string
+}
+;
 
 export default Results;

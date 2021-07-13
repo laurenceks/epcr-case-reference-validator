@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {useEffect, useRef, useState} from "react";
 import {logDOM} from "@testing-library/react";
 
-const ResultString = ({referenceValidity, resultString, styleMap, resultMatches, setUnderScoreDimensions}) => {
+const ResultString = ({referenceValidity, resultString, styleMap, resultMatches, setUnderScoreDimensions, letterToSpan}) => {
 
     const resultStringRef = useRef();
 
@@ -22,11 +22,6 @@ const ResultString = ({referenceValidity, resultString, styleMap, resultMatches,
     }, [resultString, resultMatches, setUnderScoreDimensions]);
 
     const rl = resultString.length;
-
-    const letterToSpan = (x, i) => {
-        return <span className={`letter${resultMatches.individualCharacters[i] ? ` letterMatch  ${styleMap[referenceValidity].borderClass}` : ""}`}
-                     key={i}>{x} {resultMatches.individualCharacters[i] && <span className={`letterCaret`}/>} </span>;
-    }
 
     return (
         <p className={`resultString ${styleMap[referenceValidity].colourClass}`}>
