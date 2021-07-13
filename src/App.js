@@ -7,6 +7,7 @@ function App() {
     const [refString, setRefString] = useState("");
     const [referenceValidity, setReferenceValidity] = useState(null);
     const [validitySubtext, setValiditySubtext] = useState(null);
+    const [resultMatches, setResultMatches] = useState(null);
 
     useEffect(() => {
         const query = new URLSearchParams(window.location.search).get("ref");
@@ -22,38 +23,71 @@ function App() {
     useEffect(() => {
         let finalValidity = null;
         let finalSubtext = null;
+        let finalResultMatches = {
+            length: {
+                match: false,
+                text: "",
+            },
+            lastFour: {
+                match: false,
+                text: ""
+            },
+            individualCharacters: {},
+            showUnderscore: false
+        }
         //tests
         //first - is it valid?
         const validRegEx = /^[A-Z][A-Z0-9]{7}\d{4}$/
-        if (refString.length <= 8) {
-            finalValidity = null;
-        } else if (validRegEx.test(refString)) {
-            //valid reference!
-            //check if ambiguous
-            const letterLikeRegEx = /[015OIS]/g;
-            if (refString.substr(8, 4) === "0000") {
-                finalValidity = "warning"
-                finalSubtext = "This case reference ends in 0000 which means it was created offline - contact epcr@secamb.nhs.uk to confirm it was merged"
-            } else if (letterLikeRegEx.test(refString.substr(0, 8))) {
-                finalValidity = "warning"
-                //create recommendations
-            } else {
-                finalValidity = "valid";
+        const letterLikeRegEx = /[015OIS]/;
+        const findLetterLike = (x, i) => {
+            if (letterLikeRegEx.test(x)) {
+                finalResultMatches.individualCharacters[i] = {match: x, i: i}
             }
-        } else {
-            finalValidity = "invalid";
-            if (refString.length < 12) {
-                finalSubtext = "Case references must be 12 digits long"
-            } else if (!/^[A-Z]/.test(refString)) {
-                finalSubtext = "Case references must start with a letter"
-            } else if (!/^\d{4}$/.test(refString.substr(9, 4))) {
-                finalSubtext = "Case references must end in four digits"
+        }
+        if (refString.length >= 8) {
+            if (validRegEx.test(refString)) {
+                //valid reference!
+                //check if ambiguous
+                if (letterLikeRegEx.test(refString.substr(0, 8))) {
+                    finalValidity = "warning"
+                    refString.substr(0, 8).split("").forEach(findLetterLike)
+                    //create recommendations
+
+                } else if (refString.substr(8, 4) === "0000") {
+                    finalValidity = "warning"
+                    finalSubtext = "This case reference ends in 0000 which means it was created offline - contact epcr@secamb.nhs.uk to confirm it was merged"
+                    finalResultMatches.lastFour = {match: true, text: "Ends in 0000"}
+
+                    finalResultMatches.showUnderscore = true
+                } else {
+                    finalValidity = "valid";
+                }
+            } else {
+                finalValidity = "invalid";
+                if (refString.length < 12) {
+                    finalSubtext = "Case references must be 12 digits long"
+                    finalResultMatches.length = {match: true, text: `Only ${refString.length} characters`}
+                    finalResultMatches.showUnderscore = true
+                } else if (!/^[A-Z]/.test(refString)) {
+                    finalSubtext = "Case references must start with a letter"
+                    finalResultMatches.individualCharacters[0] = {i: 0, type: "firstLetter"}
+                } else if (!/^\d{4}$/.test(refString.substr(8, 4))) {
+                    finalSubtext = "Case references must end in four digits"
+                    finalResultMatches.lastFour = {match: true, text: `Ends in ${refString.substr(8, 4)}`}
+                    refString.substr(8, 4).split("").forEach((x, i) => {
+                        if (/[A-Z]/.test(x)) {
+                            finalResultMatches.individualCharacters[i + 8] = {match: x, i: (i + 8)}
+                        }
+                    })
+                    finalResultMatches.showUnderscore = true
+                }
             }
         }
         setReferenceValidity(finalValidity);
         setValiditySubtext(finalSubtext);
-    }, [refString]);
+        setResultMatches(finalResultMatches);
 
+    }, [refString]);
 
     return (
         <div className={"pageWrap"}>
@@ -64,7 +98,7 @@ function App() {
                     <ReferenceInput refString={refString} onChange={setRefString}/></div>
                 <div className="row justify-content-center mb-5">
                     {referenceValidity && <Results refString={refString} referenceValidity={referenceValidity}
-                                                   validitySubtext={validitySubtext}/>}
+                                                   validitySubtext={validitySubtext} resultMatches={resultMatches}/>}
                 </div>
             </div>
         </div>
