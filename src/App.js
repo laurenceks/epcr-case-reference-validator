@@ -117,7 +117,7 @@ function App() {
             <Header/>
             <div className="mainWrap container-fluid d-flex flex-column justify-content-center px-5">
                 <div className="row justify-content-center">
-                    <ReferenceInput refString={refString} onChange={setRefString}/></div>
+                    <ReferenceInput refString={refString} onChange={setRefString} hasBeenEnteredOnce={hasBeenEnteredOnce}/></div>
                 <div className="row justify-content-center mb-5">
                     {referenceValidity && <Results refString={refString} referenceValidity={referenceValidity}
                                                    validitySubtext={validitySubtext} resultMatches={resultMatches}/>}
