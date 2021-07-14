@@ -9,7 +9,7 @@ const ReferenceInput = props => {
                    defaultValue={props.refString}
                    maxLength={12}
                    onChange={(e) => {
-                       if (e.target.value.length > 3) {
+                       if (e.target.value.length > 0) {
                            props.onChange(e.target.value.toUpperCase());
                            window.history.pushState(null, null, "?ref=" + e.target.value.toUpperCase());
                        } else {

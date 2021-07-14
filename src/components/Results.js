@@ -61,14 +61,13 @@ const Results = props => {
             </div>
             <p className={`iconText text-center ${styleMap[props.referenceValidity].colourClass}`}>{styleMap[props.referenceValidity].text}</p>
             <p className="text-center">{props.validitySubtext || styleMap[props.referenceValidity].subtext}</p>
-            <ul>
-                {props.resultMatches.replacements.map((x) => {
-                    return <li> {x.split("").map((y, i, a) => {
-                        return letterToSpan(y, i, a, props.refString.charAt(i) !== y, `${x}-${y}-${i}`)
-                    })}
-                    </li>
+            {props.resultMatches.replacements.length > 0 && <h2 className={"mt-5 mb-3"}>Try these alternatives</h2>}
+            {props.resultMatches.replacements.map((x) => {
+                return <p className={"resultString"}> {x.split("").map((y, i, a) => {
+                    return letterToSpan(y, i, a, props.refString.charAt(i) !== y, `${x}-${y}-${i}`)
                 })}
-            </ul>
+                </p>
+            })}
         </div>
     );
 };
@@ -76,10 +75,7 @@ const Results = props => {
 Results.propTypes =
     {
         refString: PropTypes.string,
-        referenceValidity
-:
-PropTypes.string
-}
-;
+        referenceValidity: PropTypes.string
+    }
 
 export default Results;
