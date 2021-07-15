@@ -133,14 +133,14 @@ function App() {
         } else if (!hasBeenEnteredOnce && refString.length === 12) {
             setHasBeenEnteredOnce(true);
         }
-    }, [refString]);
+    }, [refString, hasBeenEnteredOnce]);
 
     return (
         <div className={"pageWrap p-3 d-flex justify-content-center flex-wrap"}>
             <Header/>
             <div
                 className="mainWrap container-fluid d-flex flex-column justify-content-center px-2 px-sm-3 px-md-5 position-relative">
-                <div className={"mainWrap bg"}/>
+                <div className={"mainWrapBg bg"}/>
                 <div className="row justify-content-center">
                     <ReferenceInput refString={refString} onChange={setRefString}
                                     hasBeenEnteredOnce={hasBeenEnteredOnce}/></div>

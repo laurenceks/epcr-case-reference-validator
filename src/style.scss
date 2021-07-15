@@ -30,6 +30,7 @@ html, body {
 
 div.pageWrap {
   position: relative;
+  overflow-x: hidden;
 }
 
 div.mainWrap, div.headerBody, div.headerWrap, div.mainWrap {
@@ -49,7 +50,7 @@ div.bg {
   mix-blend-mode: lighten;
 }
 
-div.mainWrap.bg {
+div.mainWrapBg.bg {
   border-bottom-right-radius: $bgBorderRadius;
   border-bottom-left-radius: $bgBorderRadius;
   border-top: none;
@@ -58,7 +59,7 @@ div.mainWrap.bg {
   top: 3rem;
 }
 
-div.headerWrap.bg {
+div.headerWrapBg.bg {
   border-top-right-radius: $bgBorderRadius;
   border-top-left-radius: $bgBorderRadius;
   border-bottom: none;
