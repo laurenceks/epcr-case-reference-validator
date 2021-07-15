@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {FaCheckCircle, FaTimesCircle, FaExclamationCircle} from "react-icons/fa"
 import ResultString from "./ResultString";
-import {useRef, useState} from "react";
+import {useState} from "react";
 
 const Results = props => {
     const letterToSpan = (x, i, a, match = props.resultMatches.individualCharacters[i], key = null) => {
