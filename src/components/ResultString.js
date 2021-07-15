@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import {useEffect, useRef, useState} from "react";
-import {logDOM} from "@testing-library/react";
+import {useEffect, useRef} from "react";
 
 const ResultString = ({
                           referenceValidity,
