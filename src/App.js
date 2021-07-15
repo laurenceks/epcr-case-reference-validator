@@ -18,6 +18,9 @@ function App() {
         } else {
             window.history.replaceState(null, null, "/");
         }
+        window.addEventListener("onpopstate", (e) => {
+            console.log("History change!")
+        });
     }, []);
 
     useEffect(() => {
@@ -108,13 +111,13 @@ function App() {
         } else if (!hasBeenEnteredOnce && refString.length === 12) {
             setHasBeenEnteredOnce(true);
         }
-
     }, [refString]);
 
     return (
         <div className={"pageWrap p-3 d-flex justify-content-center flex-wrap"}>
             <Header/>
-            <div className="mainWrap container-fluid d-flex flex-column justify-content-center px-2 px-sm-3 px-md-5 position-relative">
+            <div
+                className="mainWrap container-fluid d-flex flex-column justify-content-center px-2 px-sm-3 px-md-5 position-relative">
                 <div className={"mainWrap bg"}/>
                 <div className="row justify-content-center">
                     <ReferenceInput refString={refString} onChange={setRefString}

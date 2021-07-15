@@ -2,24 +2,40 @@ import PropTypes from 'prop-types';
 import {useEffect, useRef, useState} from "react";
 import {logDOM} from "@testing-library/react";
 
-const ResultString = ({referenceValidity, resultString, styleMap, resultMatches, setUnderScoreDimensions, letterToSpan}) => {
+const ResultString = ({
+                          referenceValidity,
+                          resultString,
+                          styleMap,
+                          resultMatches,
+                          setUnderScoreDimensions,
+                          letterToSpan
+                      }) => {
 
-    const resultStringRef = useRef();
+    const resultStringRef = useRef(null);
 
     useEffect(() => {
-        let newUnderscoreDimensions = {
-            top: `calc(${resultStringRef.current.offsetHeight}px + 1rem)`,
-            width: resultStringRef.current.offsetWidth,
-            left: resultStringRef.current.offsetLeft
-        }
-        if (resultMatches.lastFour.match && resultStringRef.current.querySelector("span.lastFour")) {
-            newUnderscoreDimensions.width = resultStringRef.current.querySelector("span.lastFour").offsetWidth;
-            newUnderscoreDimensions.left = resultStringRef.current.querySelector("span.lastFour").offsetLeft;
-        }
-
-        setUnderScoreDimensions(newUnderscoreDimensions)
-
+        resizeUnderscore()
     }, [resultString, resultMatches, setUnderScoreDimensions]);
+    useEffect(() => {
+        window.addEventListener("resize", (e) => {
+            resizeUnderscore();
+        })
+    }, []);
+
+    const resizeUnderscore = () => {
+        if (resultStringRef.current) {
+            let newUnderscoreDimensions = {
+                top: `calc(${resultStringRef.current.offsetHeight}px + 1rem)`,
+                width: resultStringRef.current.offsetWidth,
+                left: resultStringRef.current.offsetLeft
+            }
+            if (resultMatches.lastFour.match && resultStringRef.current.querySelector("span.lastFour")) {
+                newUnderscoreDimensions.width = resultStringRef.current.querySelector("span.lastFour").offsetWidth;
+                newUnderscoreDimensions.left = resultStringRef.current.querySelector("span.lastFour").offsetLeft;
+            }
+            setUnderScoreDimensions(newUnderscoreDimensions)
+        }
+    }
 
     const rl = resultString.length;
 
