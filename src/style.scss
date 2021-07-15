@@ -74,7 +74,7 @@ div.mainWrap > * {
 div.header.bg {
   top: -1.5rem;
   height: calc(100% + 4.5rem);
-  width: 100vw;
+  width: calc(100vw + 10px);
   background-image: url("img/header_bg.jpg");
   background-size: cover;
   background-position: 50% 50%;
