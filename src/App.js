@@ -59,20 +59,20 @@ function App() {
             }
             //tests
             //first - is it valid?
-            const validRegEx = /^[A-Z][A-Z0-9]{7}\d{4}$/
+            const validRegEx = /^[A-Z][A-Z0-9]{7}\d{4}$/;
             const letterLikeRegEx = /[015OIS]/;
-            const findLetterLike = (x, i) => {
-                if (letterLikeRegEx.test(x)) {
-                    finalResultMatches.individualCharacters[i] = {match: x, i: i}
-                }
-            }
+            const illegalCharacterTest = /[\W\s_]/;
             if (refString.length >= 1) {
                 if (validRegEx.test(refString)) {
                     //valid reference!
                     //check if ambiguous
                     if (letterLikeRegEx.test(refString.substr(0, 8))) {
                         finalValidity = "warning"
-                        refString.substr(0, 8).split("").forEach(findLetterLike)
+                        refString.substr(0, 8).split("").forEach((x, i) => {
+                            if (letterLikeRegEx.test(x)) {
+                                finalResultMatches.individualCharacters[i] = {match: x, i: i}
+                            }
+                        })
                         //create recommendations
                         const substitutionMap = {
                             0: [0, "O"],
@@ -106,6 +106,13 @@ function App() {
                             text: `Only ${refString.length} character${refString.length > 1 ? "s" : ""}`
                         }
                         finalResultMatches.showUnderscore = true
+                    } else if (illegalCharacterTest.test(refString)) {
+                        refString.split("").forEach((x, i) => {
+                            if (illegalCharacterTest.test(x)) {
+                                finalResultMatches.individualCharacters[i] = {match: x, i: i}
+                            }
+                        })
+                        finalSubtext = "Case references can only contain letters and numbers"
                     } else if (!/^[A-Z]/.test(refString)) {
                         finalSubtext = "Case references must start with a letter"
                         finalResultMatches.individualCharacters[0] = {i: 0, type: "firstLetter"}
