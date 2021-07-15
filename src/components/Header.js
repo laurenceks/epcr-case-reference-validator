@@ -1,6 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 const Header = props => {
     return (
         <div className="headerWrap w-100 text-center px-2 px-sm-3 px-md-5 position-relative">
@@ -13,7 +10,5 @@ const Header = props => {
         </div>
     );
 };
-
-Header.propTypes = {};
 
 export default Header;
