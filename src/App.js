@@ -25,7 +25,6 @@ function App() {
         }
         window.addEventListener("popstate", (e) => {
             const popstateQuery = new URLSearchParams(window.location.search).get("ref");
-            console.log(popstateQuery);
             if (popstateQuery.length > 0) {
                 if (popstateQuery.length <= 12) {
                     setRefString(popstateQuery);
