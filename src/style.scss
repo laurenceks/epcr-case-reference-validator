@@ -32,44 +32,55 @@ div.pageWrap {
   position: relative;
 }
 
-div.mainWrap > div {
-  z-index: 0;
-}
-
-div.mainWrap, div.headerBody, div.header:after, div.pageWrapBg {
+div.mainWrap, div.headerBody, div.headerWrap, div.mainWrap {
   max-width: 720px;
 }
 
-div.pageWrapBg, div.header:after {
-  content: "";
+div.bg {
   position: absolute;
+  top: 0;
+  left: 0;
   background-color: #f5f6fa;
   border: 1px solid #dcdde1;
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   width: 100%;
   height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
   mix-blend-mode: lighten;
 }
 
-div.pageWrapBg {
-  top: 0;
+div.mainWrap.bg {
   border-bottom-right-radius: $bgBorderRadius;
   border-bottom-left-radius: $bgBorderRadius;
-  z-index: 0;
+  border-top: none;
   opacity: 0.95;
+  height: calc(100% - 3rem);
+  top: 3rem;
 }
 
-div.header:after {
-  top: 1.5rem;
-  height: calc(100% - 1.5rem);
+div.headerWrap.bg {
   border-top-right-radius: $bgBorderRadius;
   border-top-left-radius: $bgBorderRadius;
   border-bottom: none;
   opacity: 0.75;
+  height: calc(100% + 3rem)
+
+}
+
+div.mainWrap > * {
+  z-index: 0;
+}
+
+div.header.bg {
+  top: -1.5rem;
+  height: calc(100% + 4.5rem);
+  width: 100vw;
+  background-image: url("img/header_bg.jpg");
+  background-size: cover;
+  background-position: 50% 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
 }
 
 div.searchContainer {
@@ -89,24 +100,6 @@ div.searchContainer > input::placeholder {
   font-weight: initial;
   letter-spacing: initial;
   color: $gray-500;
-}
-
-div.headerWrap {
-  position: relative;
-  z-index: 0;
-}
-
-div.header.bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: calc(100% + 3rem);
-  background-color: #40739e;
-  background-image: url("https://products.ls.graphics/mesh-gradients/images/25.-Witch-Haze_1.jpg");
-  background-size: cover;
-  background-position: 50% 50%;
-  z-index: -1;
 }
 
 p.resultString {
