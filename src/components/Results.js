@@ -63,7 +63,7 @@ const Results = props => {
             <p className="text-center">{props.validitySubtext || styleMap[props.referenceValidity].subtext}</p>
             {props.resultMatches.replacements.length > 0 && <h2 className={"mt-5 mb-3"}>Try these alternatives</h2>}
             {props.resultMatches.replacements.map((x) => {
-                return <p className={"resultString"}> {x.split("").map((y, i, a) => {
+                return <p key={x} className={"resultString"}> {x.split("").map((y, i, a) => {
                     return letterToSpan(y, i, a, props.refString.charAt(i) !== y, `${x}-${y}-${i}`)
                 })}
                 </p>
