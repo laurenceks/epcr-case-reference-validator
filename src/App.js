@@ -14,12 +14,28 @@ function App() {
         const query = new URLSearchParams(window.location.search).get("ref");
         if (query) {
             setHasBeenEnteredOnce(true)
-            setRefString(query.length > 12 ? query.substr(0, 12) : query);
+            if (query.length <= 12) {
+                setRefString(query);
+            } else {
+                setRefString(query.substr(0, 12))
+                window.history.replaceState(null, null, "?ref=" + query.substr(0, 12));
+            }
         } else {
             window.history.replaceState(null, null, "/");
         }
-        window.addEventListener("onpopstate", (e) => {
-            console.log("History change!")
+        window.addEventListener("popstate", (e) => {
+            const popstateQuery = new URLSearchParams(window.location.search).get("ref");
+            console.log(popstateQuery);
+            if (popstateQuery.length > 0) {
+                if (popstateQuery.length <= 12) {
+                    setRefString(popstateQuery);
+                } else {
+                    setRefString(popstateQuery.substr(0, 12))
+                    window.history.replaceState(null, null, "?ref=" + popstateQuery.substr(0, 12));
+                }
+            } else {
+                setRefString("");
+            }
         });
     }, []);
 
