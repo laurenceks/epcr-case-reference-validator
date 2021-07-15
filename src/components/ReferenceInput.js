@@ -22,6 +22,9 @@ const ReferenceInput = props => {
     );
 };
 
-ReferenceInput.propTypes = {};
+ReferenceInput.propTypes = {
+    refString: PropTypes.string,
+    onChange: PropTypes.func
+};
 
 export default ReferenceInput;
