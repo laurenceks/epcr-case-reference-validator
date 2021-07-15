@@ -11,7 +11,7 @@ const ReferenceInput = props => {
                    onChange={(e) => {
                        if (e.target.value.length > 0) {
                            props.onChange(e.target.value.toUpperCase());
-                           window.history.pushState(null, null, "?ref=" + e.target.value.toUpperCase());
+                           window.history.pushState(null, null, "?ref=" + encodeURIComponent(e.target.value.toUpperCase()));
                        } else {
                            props.onChange("");
                            window.history.replaceState(null, null, "/");
