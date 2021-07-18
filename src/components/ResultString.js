@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import {useEffect, useRef} from "react";
+import Letter from "./Letter";
 
 const ResultString = ({
                           referenceValidity,
@@ -28,9 +29,9 @@ const ResultString = ({
                 width: resultStringRef.current.offsetWidth,
                 left: resultStringRef.current.offsetLeft
             }
-            if (resultMatches.lastFour.match && resultStringRef.current.querySelector("span.lastFour")) {
-                newUnderscoreDimensions.width = resultStringRef.current.querySelector("span.lastFour").offsetWidth;
-                newUnderscoreDimensions.left = resultStringRef.current.querySelector("span.lastFour").offsetLeft;
+            if (resultMatches.lastFour.match && resultStringRef.current.querySelector("div.lastFour")) {
+                newUnderscoreDimensions.width = resultStringRef.current.querySelector("div.lastFour").offsetWidth;
+                newUnderscoreDimensions.left = resultStringRef.current.querySelector("div.lastFour").offsetLeft;
             }
             setUnderScoreDimensions(newUnderscoreDimensions)
         }
@@ -39,16 +40,24 @@ const ResultString = ({
     const rl = resultString.length;
 
     return (
-        <p className={`resultString ${styleMap[referenceValidity].colourClass}`}>
-                <span ref={resultStringRef}>
-                {rl < 12 ? resultString.substr(0, 11).split("").map(letterToSpan) : resultString.substr(0, resultString.length - 4).split("").map(letterToSpan)}
+        <div className={`resultString d-flex justify-content-center ${styleMap[referenceValidity].colourClass}`}>
+                <div ref={resultStringRef}>
+                    {resultString.substr(0, rl < 12 ? 11 : resultString.length - 4).split("").map((x, i) => {
+                        return <Letter key={`${x}-${i}`} character={x}
+                                       showCaret={Boolean(resultMatches.individualCharacters[i])}
+                                       borderClass={styleMap[referenceValidity].borderClass}/>;
+                    })}
                     {rl === 12 &&
-                    <span className={"lastFour"}>
-                            {resultString.substr(8, 4).split("").map((x, i) => letterToSpan(x, i + 8))}
-                        </span>
+                    <div className={"lastFour d-inline-block"}>
+                            {resultString.substr(8, 4).split("").map((x, i) => {
+                                return <Letter key={`${x}-${i}`} character={x}
+                                               showCaret={Boolean(resultMatches.individualCharacters[i + 8])}
+                                               borderClass={styleMap[referenceValidity].borderClass}/>;
+                            })}
+                        </div>
                     }
-                </span>
-        </p>
+                </div>
+        </div>
     );
 }
 

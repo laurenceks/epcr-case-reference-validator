@@ -136,7 +136,7 @@ function App() {
     }, [refString, hasBeenEnteredOnce]);
 
     return (
-        <div className={"pageWrap p-3 d-flex justify-content-center flex-wrap"}>
+        <div className={"pageWrap p-3 d-grid justify-content-center"}>
             <Header/>
             <div
                 className="mainWrap container-fluid d-flex flex-column justify-content-center px-2 px-sm-3 px-md-5 position-relative">

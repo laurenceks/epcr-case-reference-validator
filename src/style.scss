@@ -103,34 +103,37 @@ div.searchContainer > input::placeholder {
   color: $gray-500;
 }
 
-p.resultString {
+div.resultString {
   font-size: 3rem;
   text-transform: uppercase;
   font-weight: 600;
   text-align: center;
 }
 
-p.resultString span {
+div.letterWrap{
   display: inline-block;
-}
-
-span.letter {
-  padding: 0 0.5rem;
-}
-
-span.letter.letterMatch {
   position: relative;
 }
 
-span.letter > span.letterCaret {
-  position: absolute;
-  left: 50%;
-  width: 0;
-  display: inline-block;
-  border: 10px solid transparent;
-  border-top-color: inherit;
+div.letter {
+  padding: 0 0.5rem;
+}
+
+div.letter.letterMatch {
+  position: relative;
+}
+
+div.letterCaret {
   content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
   transform: translateX(-50%);
+  border: 10px solid transparent;
+  width: 10px;
+  height: 10px;
+  border-top-color: inherit;
 }
 
 div.stringUnderscore {
