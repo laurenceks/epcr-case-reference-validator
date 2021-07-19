@@ -84,12 +84,9 @@ div.header.bg {
   border: none;
 }
 
-div.searchContainer {
-}
-
 div.searchContainer > input {
   height: 4rem;
-  font-size: 2rem;
+  font-size: min(8.5vw, 2rem);
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
@@ -103,21 +100,25 @@ div.searchContainer > input::placeholder {
   color: $gray-500;
 }
 
+div.resultString, div.letter {
+  font-size: min(7.5vw, 3rem);
+}
+
 div.resultString {
-  font-size: 3rem;
   text-transform: uppercase;
   font-weight: 600;
   text-align: center;
 }
 
-div.letterWrap{
+div.letterWrap {
   display: inline-block;
   position: relative;
+  min-width: min(6.5vw, 45px)
 }
 
 div.letter {
-  padding: 0 0.5rem;
-  min-width: 45px;
+  padding: 0 clamp(0rem, 1.2vw, 0.5rem);
+  margin-top: max(0px, calc(10px - 25%));
 }
 
 div.letter.letterMatch {
@@ -131,7 +132,7 @@ div.letterCaret {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  border: 10px solid transparent;
+  border: min(10px, 1.3vh) solid transparent;
   width: 10px;
   height: 10px;
   border-top-color: inherit;
