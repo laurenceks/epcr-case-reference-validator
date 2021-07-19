@@ -40,6 +40,10 @@ function App() {
 
     useEffect(() => {
         if (hasBeenEnteredOnce || (!hasBeenEnteredOnce && refString.length === 12)) {
+            if(!hasBeenEnteredOnce){
+                //String has been entered at least once, so set to true if still false
+                setHasBeenEnteredOnce(true);
+            }
             //a full string has been entered at least once, so show results
             let finalValidity = null;
             let finalSubtext = null;
@@ -57,14 +61,15 @@ function App() {
                 showUnderscore: false
             }
             //tests
-            //first - is it valid?
             const validRegEx = /^[A-Z][A-Z0-9]{7}\d{4}$/;
             const letterLikeRegEx = /[015OIS]/;
             const illegalCharacterTest = /[\W\s_]/;
+            //Is it not blank?
             if (refString.length >= 1) {
+                const lastFourCharacters = refString.substr(8, 4)
+                //Is it valid?
                 if (validRegEx.test(refString)) {
-                    //valid reference!
-                    //check if ambiguous
+                    //Is it ambiguous?
                     if (letterLikeRegEx.test(refString.substr(0, 8))) {
                         finalValidity = "warning"
                         refString.substr(0, 8).split("").forEach((x, i) => {
@@ -72,7 +77,7 @@ function App() {
                                 finalResultMatches.individualCharacters[i] = {match: x, i: i}
                             }
                         })
-                        //create recommendations
+                        //Create recommendations
                         const substitutionMap = {
                             0: [0, "O"],
                             1: [1, "I"],
@@ -88,7 +93,7 @@ function App() {
                         finalResultMatches.replacements = cartesian(...cartesianArray).map((x) => {
                             return x.join("")
                         });
-                    } else if (refString.substr(8, 4) === "0000") {
+                    } else if (lastFourCharacters === "0000") {
                         finalValidity = "warning"
                         finalSubtext = "This case reference ends in 0000 which means it was created offline - contact epcr@secamb.nhs.uk to confirm it was merged"
                         finalResultMatches.lastFour = {match: true, text: "Ends in 0000"}
@@ -115,10 +120,11 @@ function App() {
                     } else if (!/^[A-Z]/.test(refString)) {
                         finalSubtext = "Case references must start with a letter"
                         finalResultMatches.individualCharacters[0] = {i: 0, type: "firstLetter"}
-                    } else if (!/^\d{4}$/.test(refString.substr(8, 4))) {
+                    } else if (!/^\d{4}$/.test(lastFourCharacters)) {
                         finalSubtext = "Case references must end in four digits"
-                        finalResultMatches.lastFour = {match: true, text: `Ends in ${refString.substr(8, 4)}`}
-                        refString.substr(8, 4).split("").forEach((x, i) => {
+                        finalResultMatches.lastFour = {match: true, text: `Ends in ${lastFourCharacters}`}
+                        // Show caret above end four characters
+                        lastFourCharacters.split("").forEach((x, i) => {
                             if (/[A-Z]/.test(x)) {
                                 finalResultMatches.individualCharacters[i + 8] = {match: x, i: (i + 8)}
                             }
@@ -149,7 +155,9 @@ function App() {
                                                    validitySubtext={validitySubtext} resultMatches={resultMatches}/>}
                 </div>
                 <div className="row justify-content-center">
-                    <p className="text-muted small text-center">Photo by <a href="https://unsplash.com/@samsommer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">samsommer</a> on <a href="https://unsplash.com/s/photos/mountains?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                    <p className="text-muted small text-center">Photo by <a
+                        href="https://unsplash.com/@samsommer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">samsommer</a> on <a
+                        href="https://unsplash.com/s/photos/mountains?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
                     </p>
                     <p className="text-muted small text-center">© Laurence Summers 2021. All rights reserved.</p>
                 </div>
