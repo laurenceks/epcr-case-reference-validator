@@ -38,7 +38,6 @@ const ResultString = ({
     }
 
     const rl = resultString.length;
-
     return (
         <div className={`resultString d-flex justify-content-center ${styleMap[referenceValidity].colourClass}`}>
                 <div ref={resultStringRef}>
