@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-const Letter = ({character, showCaret, borderClass}) => {
+const Letter = ({character, showCaret, borderClass, colourClass}) => {
         return (
             <div className={`letterWrap ${borderClass}`}>
                 {showCaret && <div className={"letterCaret"}/>}
-                <div className={`letter d-inline-block${showCaret ? ` letterMatch` : ""}`}>
+                <div className={`letter d-inline-block${showCaret ? ` letterMatch ${colourClass}` : ""}`}>
                     {character}
                 </div>
             </div>);
