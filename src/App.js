@@ -151,6 +151,7 @@ function App() {
                 <div className="row justify-content-center">
                     <p className="text-muted small text-center">Photo by <a href="https://unsplash.com/@samsommer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">samsommer</a> on <a href="https://unsplash.com/s/photos/mountains?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
                     </p>
+                    <p className="text-muted small text-center">© Laurence Summers 2021. All rights reserved.</p>
                 </div>
             </div>
         </div>
