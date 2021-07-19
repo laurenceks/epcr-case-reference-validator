@@ -143,11 +143,17 @@ div.stringUnderscore {
   border: $underScoreBorderWidth solid;
   border-top: none;
   position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   ////move left by one padding + one border width
   ////padding: 0 0.25rem;
   //box-sizing: content-box;
   //transform: translateX(-0.45rem);
-  transition: left 400ms $easeOutCirc, width 400ms $easeOutCirc, border-color 400ms $easeOutCirc;
+  transition: left 400ms $easeOutCirc, width 400ms $easeOutCirc, border-color 400ms $easeOutCirc, transform 400ms $easeOutCirc;
+}
+
+div.resultsWrap {
+  transition: margin-bottom 400ms $easeOutCirc;
 }
 
 .stringUnderscore:after {

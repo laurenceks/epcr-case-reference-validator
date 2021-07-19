@@ -31,15 +31,12 @@ const Results = props => {
 
     const ResultIcon = styleMap[props.referenceValidity].icon;
     const [underScoreDimensions, setUnderScoreDimensions] = useState({
-        top: 0,
-        width: 0,
-        left: 0
+        width: 0
     });
 
-
     return (
-        <div className="Results d-flex flex-column justify-content-center">
-            <div className={`py-4 ${props.resultMatches.showUnderscore && "mb-5"} position-relative`}>
+        <div className="d-flex flex-column justify-content-center">
+            <div className={`resultsWrap py-4 ${props.resultMatches.showUnderscore && "mb-5"} position-relative`}>
                 <ResultString resultString={props.refString} referenceValidity={props.referenceValidity}
                               styleMap={styleMap} setUnderScoreDimensions={setUnderScoreDimensions}
                               resultMatches={props.resultMatches}/>
@@ -49,9 +46,8 @@ const Results = props => {
                     <div
                         className={`stringUnderscoreText ${styleMap[props.referenceValidity].colourClass}`}>{props.resultMatches.length.match ? props.resultMatches.length.text : props.resultMatches.lastFour.match ? props.resultMatches.lastFour.text : ""}</div>
                 </div>}
-
             </div>
-            <div className={`resultIcon ${styleMap[props.referenceValidity].colourClass}`}>
+            <div className={`resultIcon mt-3 ${styleMap[props.referenceValidity].colourClass}`}>
                 <ResultIcon/>
             </div>
             <p className={`iconText text-center ${styleMap[props.referenceValidity].colourClass}`}>{styleMap[props.referenceValidity].text}</p>
