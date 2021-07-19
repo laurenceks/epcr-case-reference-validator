@@ -5,11 +5,6 @@ import {useState} from "react";
 import Letter from "./Letter";
 
 const Results = props => {
-    const letterToSpan = (x, i, a, match = props.resultMatches.individualCharacters[i], key = null) => {
-        return <span
-            className={`letter${match ? ` letterMatch  ${styleMap[props.referenceValidity].borderClass}` : ""}`}
-            key={key || i}>{x} {match && <span className={`letterCaret`}/>} </span>;
-    }
     const styleMap = {
         "valid": {
             colourClass: "text-success",
@@ -47,7 +42,6 @@ const Results = props => {
             <div className={`py-4 ${props.resultMatches.showUnderscore && "mb-5"} position-relative`}>
                 <ResultString resultString={props.refString} referenceValidity={props.referenceValidity}
                               styleMap={styleMap} setUnderScoreDimensions={setUnderScoreDimensions}
-                              letterToSpan={letterToSpan}
                               resultMatches={props.resultMatches}/>
                 {props.resultMatches.showUnderscore &&
                 <div className={`stringUnderscore ${styleMap[props.referenceValidity].borderClass}`}
