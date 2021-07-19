@@ -64,13 +64,16 @@ const Results = props => {
             <p className="text-center">{props.validitySubtext || styleMap[props.referenceValidity].subtext}</p>
             {props.resultMatches.replacements.length > 0 && <h2 className={"mt-5 mb-3"}>Try these alternatives</h2>}
             {props.resultMatches.replacements.map((x) => {
-                return <div key={x} className={"resultString"}>
-                    {x.split("").map((y, i, a) => {
-                    return <Letter key={`${x}-${y}-${i}`} showCaret={props.refString.charAt(i) !== y}
-                                   borderClass={styleMap[props.referenceValidity].borderClass} character={y}
-                                    className={styleMap[props.referenceValidity].colourClass}/>
-                })}
-                </div>
+                const fullString = `${x}${props.refString.substr(8, 4)}`;
+                if (fullString !== props.refString) {
+                    return <div key={x} className={"resultString"}>
+                        {fullString.split("").map((y, i, a) => {
+                            return <Letter key={`${x}-${y}-${i}`} showCaret={props.refString.charAt(i) !== y}
+                                           borderClass={styleMap[props.referenceValidity].borderClass} character={y}
+                                           className={styleMap[props.referenceValidity].colourClass}/>
+                        })}
+                    </div>
+                }
             })}
         </div>
     );
