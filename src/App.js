@@ -148,6 +148,10 @@ function App() {
                     {referenceValidity && <Results refString={refString} referenceValidity={referenceValidity}
                                                    validitySubtext={validitySubtext} resultMatches={resultMatches}/>}
                 </div>
+                <div className="row justify-content-center">
+                    <p className="text-muted small text-center">Photo by <a href="https://unsplash.com/@samsommer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">samsommer</a> on <a href="https://unsplash.com/s/photos/mountains?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                    </p>
+                </div>
             </div>
         </div>
     );
