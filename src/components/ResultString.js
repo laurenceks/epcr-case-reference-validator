@@ -31,11 +31,11 @@ const ResultString = ({
                 width: resultStringRef.current.offsetWidth,
             }
             if (resultMatches.lastFour.match && resultStringRef.current.querySelector("div.lastFour")) {
+                const w = resultStringRef.current.querySelector("div.lastFour").offsetWidth;
                 newUnderscoreDimensions = {
                     ...newUnderscoreDimensions,
-                    width: resultStringRef.current.querySelector("div.lastFour").offsetWidth,
-                    left: resultStringRef.current.querySelector("div.lastFour").offsetLeft,
-                    transform: "translateX(0%)"
+                    width: w,
+                    left: resultStringRef.current.querySelector("div.lastFour").offsetLeft + (w/2),
                 }
             }
             setUnderScoreDimensions(newUnderscoreDimensions)
