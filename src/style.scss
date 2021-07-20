@@ -139,7 +139,7 @@ div.letterCaret {
 }
 
 div.stringUnderscore {
-  height: 1rem;
+  height: clamp(0.3rem, 15%, 1rem);
   border: $underScoreBorderWidth solid;
   border-top: none;
   position: absolute;
