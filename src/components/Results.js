@@ -31,7 +31,8 @@ const Results = props => {
 
     const ResultIcon = styleMap[props.referenceValidity].icon;
     const [underScoreDimensions, setUnderScoreDimensions] = useState({
-        width: 0
+        width: 0,
+        opacity: 0
     });
 
     return (

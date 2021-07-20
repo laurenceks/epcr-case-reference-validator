@@ -29,13 +29,14 @@ const ResultString = ({
             let newUnderscoreDimensions = {
                 top: `calc(${resultStringRef.current.offsetHeight}px + 1rem)`,
                 width: resultStringRef.current.offsetWidth,
+                opacity: 1
             }
             if (resultMatches.lastFour.match && resultStringRef.current.querySelector("div.lastFour")) {
                 const w = resultStringRef.current.querySelector("div.lastFour").offsetWidth;
                 newUnderscoreDimensions = {
                     ...newUnderscoreDimensions,
                     width: w,
-                    left: resultStringRef.current.querySelector("div.lastFour").offsetLeft + (w/2),
+                    left: resultStringRef.current.querySelector("div.lastFour").offsetLeft + (w / 2),
                 }
             }
             setUnderScoreDimensions(newUnderscoreDimensions)
