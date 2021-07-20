@@ -14,9 +14,11 @@ const ResultString = ({
     const resultStringRef = useRef(null);
 
     useEffect(() => {
+        //resize whenever the matches object is updated
         resizeUnderscore()
-    }, [resultString, resultMatches, setUnderScoreDimensions]);
+    }, [resultMatches]);
     useEffect(() => {
+        //resize whenever the window resizes
         window.addEventListener("resize", (e) => {
             resizeUnderscore();
         })
@@ -27,14 +29,13 @@ const ResultString = ({
             let newUnderscoreDimensions = {
                 top: `calc(${resultStringRef.current.offsetHeight}px + 1rem)`,
                 width: resultStringRef.current.offsetWidth,
-                // left: resultStringRef.current.offsetLeft,
             }
             if (resultMatches.lastFour.match && resultStringRef.current.querySelector("div.lastFour")) {
                 newUnderscoreDimensions = {
                     ...newUnderscoreDimensions,
                     width: resultStringRef.current.querySelector("div.lastFour").offsetWidth,
                     left: resultStringRef.current.querySelector("div.lastFour").offsetLeft,
-                    transform: "none"
+                    transform: "translateX(0%)"
                 }
             }
             setUnderScoreDimensions(newUnderscoreDimensions)
