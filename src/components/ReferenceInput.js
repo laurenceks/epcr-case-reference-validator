@@ -14,7 +14,7 @@ const ReferenceInput = props => {
                            window.history.pushState(null, null, "?ref=" + encodeURIComponent(e.target.value.toUpperCase()));
                        } else {
                            props.onChange("");
-                           window.history.replaceState(null, null, "/");
+                           window.history.replaceState(null, null, window.location.pathname);
                        }
                    }}
             />

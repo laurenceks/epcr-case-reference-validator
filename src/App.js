@@ -21,7 +21,7 @@ function App() {
                 window.history.replaceState(null, null, "?ref=" + query.substr(0, 12));
             }
         } else {
-            window.history.replaceState(null, null, "/");
+            window.history.replaceState(null, null, window.location.pathname);
         }
         window.addEventListener("popstate", (e) => {
             const popstateQuery = new URLSearchParams(window.location.search).get("ref");
