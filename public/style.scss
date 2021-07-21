@@ -97,7 +97,13 @@ div.searchContainer > input::placeholder {
   letter-spacing: initial;
   color: $gray-500;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
+input[placeholder] { text-overflow: ellipsis; }
+::-moz-placeholder { text-overflow: ellipsis; } /* firefox 19+ */
+input:-moz-placeholder { text-overflow: ellipsis; }
 
 div.resultString, div.letter {
   font-size: min(7.5vw, 3rem);
@@ -116,7 +122,7 @@ div.letterWrap {
 }
 
 div.letter {
-  padding: 0 clamp(0rem, 1.2vw, 0.5rem);
+  padding: 0 clamp(0rem, 1vw, 0.5rem);
   margin-top: max(0px, calc(10px - 25%));
 }
 
