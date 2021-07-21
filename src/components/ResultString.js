@@ -22,6 +22,9 @@ const ResultString = ({
         window.addEventListener("resize", (e) => {
             resizeUnderscore();
         })
+        document.fonts.onloadingdone = () => {
+            resizeUnderscore();
+        };
     }, []);
 
     const resizeUnderscore = () => {
