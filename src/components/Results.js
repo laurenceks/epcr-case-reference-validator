@@ -65,6 +65,8 @@ const Results = props => {
                             />
                         })}
                     </div>
+                } else {
+                    return "";
                 }
             })}
         </div>
