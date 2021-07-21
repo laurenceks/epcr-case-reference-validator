@@ -8,8 +8,6 @@ $success: #4cd137;
 $warning: #fbc531;
 $danger: #e84118;
 $font-family-sans-serif: "Roboto", sans-serif !default;
-//$headings-font-family: "Bahnschrift", "Heebo", "Arial", sans-serif;
-//$input-btn-font-family: "Bahnschrift", "Heebo", "Arial", sans-serif;
 $input-font-family: $font-family-sans-serif;
 
 $bgBorderRadius: 20px;
@@ -98,6 +96,7 @@ div.searchContainer > input::placeholder {
   font-weight: initial;
   letter-spacing: initial;
   color: $gray-500;
+  text-overflow: ellipsis;
 }
 
 div.resultString, div.letter {
@@ -113,7 +112,7 @@ div.resultString {
 div.letterWrap {
   display: inline-block;
   position: relative;
-  min-width: min(6.5vw, 45px)
+  min-width: min(6.5vw, 45px);
 }
 
 div.letter {
@@ -125,7 +124,7 @@ div.letter.letterMatch {
   position: relative;
 }
 
-div.letterCaret {
+div.letterWrap > div.letterCaret {
   content: "";
   display: block;
   position: absolute;
@@ -145,11 +144,7 @@ div.stringUnderscore {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  ////move left by one padding + one border width
-  ////padding: 0 0.25rem;
-  //box-sizing: content-box;
-  //transform: translateX(-0.45rem);
-  transition: left 400ms $easeOutCirc, width 400ms $easeOutCirc, border-color 400ms $easeOutCirc, transform 400ms $easeOutCirc;
+  transition: left 400ms $easeOutCirc, width 400ms $easeOutCirc, border-color 400ms $easeOutCirc;
 }
 
 div.resultsWrap {
