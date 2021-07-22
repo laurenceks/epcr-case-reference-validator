@@ -1,6 +1,6 @@
 const Header = props => {
     return (
-        <div className="headerWrap w-100 text-center px-2 px-sm-3 px-md-5 position-relative">
+        <div className="headerWrap w-100 text-center px-2 px-sm-3 px-md-5 mx-auto position-relative">
             <div className="header bg"/>
             <div className="headerWrapBg bg"/>
             <div className="header mx-auto position-relative">
